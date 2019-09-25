@@ -21,11 +21,11 @@ $("#add-train-btn").on("click", function (event) {
   var trainName = $("#train-name-input").val().trim();
   var trainDestination = $("#destination-input").val().trim();
   var firstTrainTime = $("#first-train-input").val().trim();
-  var trainFrequency = moment($("#frequency-input").val().trim(), "hh:mm").format("X");
+  var trainFrequency = $("#frequency-input").val().trim();
 
-  // 
-  var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
-  console.log("firstTimeConverted: " + firstTimeConverted);
+  var firstTimeConverted = moment(firstTrainTime, "hh:mm");
+  console.log("Time input on screen: " + firstTrainTime);
+  console.log("Time output by Moment: " + firstTimeConverted);
 
   // Current Time
   var currentTime = moment();
