@@ -23,16 +23,18 @@ $("#add-train-btn").on("click", function (event) {
   var firstTrainTime = $("#first-train-input").val().trim();
   var trainFrequency = $("#frequency-input").val().trim();
 
-  var firstTimeConverted = moment(firstTrainTime, "hh:mm");
-  console.log("Time input on screen: " + firstTrainTime);
-  console.log("Time output by Moment: " + firstTimeConverted);
+  var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
+  
+  console.log("firstTrainTime: " + firstTrainTime);
+  console.log("firstTimeConverted: " + firstTimeConverted);
 
   // Current Time
   var currentTime = moment();
+  console.log("CURRENT TIME: " + currentTime);
   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
   // Difference between the times
-  var diffTime = moment().diff(moment(firstTimeConverted), " minutes");
+  var diffTime = moment().diff(moment(firstTimeConverted), "  minutes");
   console.log("DIFFERENCE IN TIME: " + diffTime);
 
   // Time apart (remainder)
@@ -47,23 +49,24 @@ $("#add-train-btn").on("click", function (event) {
   var nextTrain = moment().add(tMinutesTillTrain, "minutes");
   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
+    // Calculate the minutes away
+    var minutesAway = moment((nextTrain).diff(moment(), "X"), "minutes");
+    console.log("minutesAway: " + minutesAway);
+  
 
     // Creates local "temporary" object for holding train data
     var newTrain = {
       name: trainName,
       destination: trainDestination,
       firsttime: firstTrainTime,
-      frequency: trainFrequency
-      // ,
-      // nextarrival: nextTrain
+      frequency: trainFrequency,
+      nextarrival: nextTrain.format("hh:mm")
     };
   
 
 
   // Uploads train data to the database
   database.ref().push(newTrain);
-
-  alert("Train successfully added");
 
   // Clears all of the text-boxes
   $("#train-name-input").val("");
@@ -83,7 +86,7 @@ database.ref().on("child_added", function (childSnapshot) {
 
   // Calculate the minutes away
   var minutesAway = moment().diff(moment(trainFrequency, "X"), "minutes");
-  console.log(minutesAway);
+  console.log("minutesAway: " + minutesAway);
 
   // Create the new row
   var newRow = $("<tr>").append(
