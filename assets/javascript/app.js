@@ -1,4 +1,4 @@
-// 1. Initialize Firebase
+// Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyATLQKNzaxazlo0sGV8-MbppJeQZv6VXvo",
   authDomain: "njib-train-scheduler.firebaseapp.com",
@@ -60,8 +60,6 @@ $("#add-train-btn").on("click", function (event) {
       minstillnext: tMinutesTillTrain
     };
   
-
-
   // Uploads train data to the database
   database.ref().push(newTrain);
 
