@@ -1,4 +1,5 @@
 # Train-Scheduler 
+https://njib.github.io/Train-Scheduler/
 
 This application demonstrates the usage of a Firebase database as well as Moment.js to manipulate time calculations and formats.
 
